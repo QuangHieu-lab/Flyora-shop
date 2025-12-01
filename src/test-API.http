@@ -1,0 +1,85 @@
+# POST https://flyora-backend.onrender.com/api/v1/reviews/submit
+# Content-Type: application/json
+
+# {
+#   "customerId": 1,
+#   "productId": 1,
+#   "rating": 5,
+#   "comment": "Great product!"
+# }
+
+
+POST https://flyora-backend.onrender.com/api/auth/login
+Content-Type: application/json
+
+{
+
+  "username": "owner1",
+  "password": "ownerpass"
+}
+
+
+# curl -X 'GET' \
+#   'https://flyora-backend.onrender.com/api/v1/admin/accounts?requesterId=1' \
+#   -H 'accept: */*'
+
+
+# curl -X 'GET' \
+#   'http://flyora-backend.onrender.com/api/v1/products/6' \
+#   -H 'accept: */*'
+
+
+# curl -X 'GET' \
+#   'http://flyora-backend.onrender.com/api/v1/products/search?name=hat' \
+#   -H 'accept: */*'
+
+# POST https://flyora-backend.onrender.com/api/v1/reviews/submit
+# Content-Type: application/json
+# {
+#   "customerId": 1,
+#   "productId": 6,
+#   "rating": 4,
+#   "comment": "Great product!"
+# }
+
+
+# curl -X 'PUT' \
+#   'https://flyora-backend.onrender.com/api/v1/admin/accounts/18?requesterId=1' \
+#   -H 'accept: */*' \
+#   -H 'Content-Type: application/json' \
+#   -d '{
+#   "username": "hellokitty",
+#   "password": "1234",
+#   "email": "hellokitty@flyora.com",
+#   "phone": "0987412365",
+#   "isActive": true,
+#   "isApproved": true,
+#   "roleId": 4,
+#   "roleName": "Customer",
+#   "approvedBy": 1,
+#   "name": "Kitty",
+#   "otherInfo": "nah",
+#   "shopOwnerId": 2
+# }'
+
+
+# curl -X 'DELETE' \
+#   'https://flyora-backend.onrender.com/api/v1/admin/accounts/18?requesterId=1' \
+#   -H 'accept: */*'
+
+# curl -X 'PUT' \
+#   'https://flyora-backend.onrender.com/api/v1/admin/accounts/18/deactivate?requesterId=1' \
+#   -H 'accept: */*'
+
+  # curl -X 'PUT' \
+  # 'https://flyora-backend.onrender.com/api/v1/admin/accounts/18/activate?requesterId=1' \
+  # -H 'accept: */*'
+
+  # curl -X 'GET' \
+  # 'https://flyora-backend.onrender.com/api/v1/owner/dashboard/products/top-sales' \
+
+  # -H 'accept: */*'
+
+  # curl -X 'GET' \
+  # 'https://flyora-backend.onrender.com/api/v1/products/status' \
+  # -H 'accept: */*'
