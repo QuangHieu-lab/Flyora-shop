@@ -17,19 +17,19 @@ const News = () => {
   useEffect(() => {
     setLoading(true);
     setError("");
-    fetch("https://flyora-backend.onrender.com/api/v1/news")
+    fetch("https://4zhj8ihfhh.execute-api.ap-southeast-1.amazonaws.com/dev/api/v1/news")
       .then((res) => res.json())
       .then((data) => {
         const formatted = Array.isArray(data)
           ? data.map((item) => ({
-              id: item.id || item._id,
-              title: item.title,
-              url: item.url,
-              createdAt: item.createdAt,
-              image:
-                item.imageUrl ||
-                `https://source.unsplash.com/400x300/?bird,news,${item.id}`,
-            }))
+            id: item.id || item._id,
+            title: item.title,
+            url: item.url,
+            createdAt: item.createdAt,
+            image:
+              item.imageUrl ||
+              `https://source.unsplash.com/400x300/?bird,news,${item.id}`,
+          }))
           : [];
         setNewsList(formatted);
       })
@@ -121,11 +121,10 @@ const News = () => {
                   <button
                     key={i}
                     onClick={() => setCurrentPage(i + 1)}
-                    className={`h-8 w-8 flex items-center justify-center border rounded text-sm font-medium ${
-                      currentPage === i + 1
+                    className={`h-8 w-8 flex items-center justify-center border rounded text-sm font-medium ${currentPage === i + 1
                         ? "bg-red-500 text-white"
                         : "text-gray-700 hover:bg-gray-100"
-                    }`}
+                      }`}
                   >
                     {i + 1}
                   </button>

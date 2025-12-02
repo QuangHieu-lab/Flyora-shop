@@ -34,10 +34,11 @@ import AddProduct from "pages/shopOwner/product/AddProduct";
 import EditProduct from "pages/shopOwner/product/EditProduct";
 import CancelPaymentPage from "pages/statusPayOnline/CancelPaymentPage";
 import SuccessPaymentPage from "pages/statusPayOnline/SuccessPaymentPage";
-
+import ChatbotBox from "./components/chatBox/ChatbotBox";
 function App() {
   return (
     <div className="max-w-screen-[1440px] mx-auto">
+      <ChatbotBox />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
@@ -70,7 +71,7 @@ function App() {
         <Route path="/filter" element={<ShopPage />} />
 
         <Route path="/about-us" element={<AboutUsPage />} />
-   
+
 
         {/* Admin Routes */}
         <Route path="/admin-page" element={<UserManagement />} />
