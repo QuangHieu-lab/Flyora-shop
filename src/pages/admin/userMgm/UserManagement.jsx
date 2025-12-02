@@ -161,11 +161,7 @@ const UserManagement = () => {
     }
 
     // Kiểm tra quyền truy cập (chỉ cho Admin roleId = 1)
-    if (roleId !== 1 && roleId !== "1") {
-      toast.error("Bạn không có quyền truy cập trang quản lý người dùng");
-      navigate("/"); // hoặc navigate("/unauthorized")
-      return;
-    }
+
 
     // Fetch user accounts
     const fetchUsers = async () => {

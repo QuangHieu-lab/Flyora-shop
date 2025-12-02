@@ -57,7 +57,7 @@ function FloatingContact() {
 
     useEffect(() => {
         const script = document.createElement("script");
-        script.src = "https://4zhj8ihfhh.execute-api.ap-southeast-1.amazonaws.com/dev/chatbot";
+        script.src = "https://app.thinkstack.ai/bot/thinkstackai-loader.min.js";
         script.setAttribute("chatbot_id", "687f4a3ced905abd4d1fa39e");
         script.setAttribute("data-type", "default");
         script.async = true;
