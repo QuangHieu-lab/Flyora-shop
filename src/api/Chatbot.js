@@ -9,19 +9,19 @@ const CHATBOT_API_URL = "https://4zhj8ihfhh.execute-api.ap-southeast-1.amazonaws
  * @returns {Promise} Phản hồi từ chatbot
  */
 export const sendChatbotMessage = async (message, conversationHistory = []) => {
-    try {
-        const response = await axios.post(CHATBOT_API_URL, {
-            message,
-            conversationHistory,
-        }, {
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-        return response.data;
-    } catch (error) {
-        console.error("Chatbot API error:", error);
-        throw error;
-    }
+  try {
+    const response = await axios.post(CHATBOT_API_URL, {
+      message,
+      conversationHistory,
+    }, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Chatbot API error:", error);
+    throw error;
+  }
 };
 

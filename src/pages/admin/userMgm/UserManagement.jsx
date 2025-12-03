@@ -129,7 +129,10 @@ const UserManagement = () => {
     if (!targetUser) return;
 
     try {
-      if (targetUser.active) {
+      // Hỗ trợ cả active và isActive
+      const isActive = targetUser.isActive !== undefined ? targetUser.isActive : targetUser.active;
+
+      if (isActive) {
         await deactivateAccount(targetUser.id, requesterId);
         toast.success(`Đã vô hiệu hóa ${targetUser.username}`);
       } else {
@@ -311,7 +314,7 @@ const UserManagement = () => {
                         className="px-4 py-4 text-sm text-center cursor-pointer"
                         onClick={() => openConfirmModal(user)}
                       >
-                        {getStatusBadge(user.active)}
+                        {getStatusBadge(user.isActive !== undefined ? user.isActive : user.active)}
                       </td>
                       <td className="px-4 py-4 text-sm text-gray-500 text-center">
                         <div className="flex justify-center items-center space-x-2">
@@ -409,7 +412,7 @@ const UserManagement = () => {
               <p className="text-sm text-gray-600 mb-6">
                 Bạn có chắc chắn muốn{" "}
                 <span className="font-medium text-red-600">
-                  {targetUser.active ? "vô hiệu hóa" : "kích hoạt"}
+                  {(targetUser.isActive !== undefined ? targetUser.isActive : targetUser.active) ? "vô hiệu hóa" : "kích hoạt"}
                 </span>{" "}
                 tài khoản{" "}
                 <span className="font-semibold">{targetUser.username}</span>?
