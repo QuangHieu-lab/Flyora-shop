@@ -221,14 +221,7 @@ const UserManagement = () => {
               Quản lý người dùng
             </h1>
             <div className=" absolute right-[450px] items-center space-x-4">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                <input
-                  type="text"
-                  placeholder="Tim kiếm người dùng..."
-                  className="w-80 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                />
-              </div>
+
               {/* <div className="flex items-center space-x-3">
                 <div className="w-10 h-10 bg-gray-300 rounded-full overflow-hidden">
                   <img
