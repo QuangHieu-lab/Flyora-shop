@@ -225,11 +225,10 @@ const ProductManagement = () => {
                 </span>
                 <div className="flex items-center space-x-1">
                   <button
-                    className={`w-8 h-8 rounded flex items-center justify-center text-sm font-medium ${
-                      currentPage === 1
-                        ? "text-gray-300 cursor-not-allowed"
-                        : "text-gray-500 hover:bg-gray-100"
-                    }`}
+                    className={`w-8 h-8 rounded flex items-center justify-center text-sm font-medium ${currentPage === 1
+                      ? "text-gray-300 cursor-not-allowed"
+                      : "text-gray-500 hover:bg-gray-100"
+                      }`}
                     onClick={() =>
                       setCurrentPage((prev) => Math.max(prev - 1, 1))
                     }
@@ -248,11 +247,10 @@ const ProductManagement = () => {
                     ) : (
                       <button
                         key={i}
-                        className={`w-8 h-8 rounded flex items-center justify-center text-sm font-medium ${
-                          currentPage === page
-                            ? "bg-green-500 text-white"
-                            : "text-gray-500 hover:bg-gray-100"
-                        }`}
+                        className={`w-8 h-8 rounded flex items-center justify-center text-sm font-medium ${currentPage === page
+                          ? "bg-green-500 text-white"
+                          : "text-gray-500 hover:bg-gray-100"
+                          }`}
                         onClick={() => setCurrentPage(page)}
                       >
                         {page}
@@ -260,11 +258,10 @@ const ProductManagement = () => {
                     )
                   )}
                   <button
-                    className={`w-8 h-8 rounded flex items-center justify-center text-sm font-medium ${
-                      currentPage === totalPages
-                        ? "text-gray-300 cursor-not-allowed"
-                        : "text-gray-500 hover:bg-gray-100"
-                    }`}
+                    className={`w-8 h-8 rounded flex items-center justify-center text-sm font-medium ${currentPage === totalPages
+                      ? "text-gray-300 cursor-not-allowed"
+                      : "text-gray-500 hover:bg-gray-100"
+                      }`}
                     onClick={() =>
                       setCurrentPage((prev) => Math.min(prev + 1, totalPages))
                     }

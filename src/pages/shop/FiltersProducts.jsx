@@ -10,9 +10,9 @@ import PriceFilter from "./PriceFilter";
 // Mapping tags to birdTypeId
 const birdTypeMap = {
   "Chào Mào": 1,
-  "Vẹt Xích": 2,
-  "Yến Phụng": 3,
-  "Chích Chòe": 4,
+  "Vẹt Xích": 3,
+  "Yến Phụng": 4,
+  "Chích Chòe": 2,
 };
 
 const ProductFilterPage = () => {
