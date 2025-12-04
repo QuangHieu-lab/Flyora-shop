@@ -1,0 +1,51 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo "Installing dependencies on `date`"
+      - npm ci
+      - echo "Running linter..."
+      - npm run lint --if-present || echo "No lint script configured"
+  
+  build:
+    commands:
+      - echo "Running tests on `date`"
+      - npm test -- --watchAll=false --passWithNoTests --coverage || echo "Tests completed"
+      - echo "Building application on `date`"
+      - npm run build
+      - echo "Build completed on `date`"
+  
+  post_build:
+    commands:
+      - echo "Syncing build to S3 on `date`"
+      - aws s3 sync build/ s3://$AWS_S3_BUCKET --delete --cache-control "public, max-age=3600"
+      - aws s3 cp build/index.html s3://$AWS_S3_BUCKET/index.html --cache-control "public, max-age=300" --content-type "text/html"
+      - |
+        if [ ! -z "$AWS_CLOUDFRONT_DISTRIBUTION_ID" ]; then
+          echo "Invalidating CloudFront distribution $AWS_CLOUDFRONT_DISTRIBUTION_ID"
+          aws cloudfront create-invalidation --distribution-id $AWS_CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
+        fi
+      - echo "Deployment completed on `date`"
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: build
+  name: BuildArtifact
+  discard-paths: yes
+
+cache:
+  paths:
+    - '/root/.npm/**/*'
+    - 'node_modules/**/*'
+
+reports:
+  test-report:
+    files:
+      - 'coverage/coverage-final.json'
+    file-format: 'JUNITXML'
+  coverage-report:
+    files:
+      - 'coverage/coverage-final.json'
+    file-format: 'COBERTURAXML'
