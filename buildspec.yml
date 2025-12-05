@@ -22,16 +22,20 @@ phases:
       - echo "Checking if build directory exists..."
       - ls -la build/
       - echo "Build artifacts created successfully"
+      - echo "Checking S3 bucket configuration..."
       - |
         if [ ! -z "$AWS_S3_BUCKET" ]; then
-          echo "Deploying to S3: $AWS_S3_BUCKET"
-          aws s3 sync build/ s3://$AWS_S3_BUCKET --delete
-          if [ ! -z "$CLOUDFRONT_DISTRIBUTION_ID" ]; then
-            echo "Invalidating CloudFront: $CLOUDFRONT_DISTRIBUTION_ID"
-            aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
-          fi
+          echo "Deploying to S3: $AWS_S3_BUCKET";
+          aws s3 sync build/ s3://$AWS_S3_BUCKET --delete;
         else
-          echo "Skipping deployment - no S3 bucket configured"
+          echo "Skipping S3 deployment - no bucket configured";
+        fi
+      - |
+        if [ ! -z "$CLOUDFRONT_DISTRIBUTION_ID" ]; then
+          echo "Invalidating CloudFront: $CLOUDFRONT_DISTRIBUTION_ID";
+          aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*";
+        else
+          echo "Skipping CloudFront invalidation - no distribution ID";
         fi
 
 artifacts:
