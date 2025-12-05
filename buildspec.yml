@@ -20,7 +20,7 @@ phases:
     commands:
       - echo "Post-build phase started on `date`"
       - echo "Checking if build directory exists..."
-      - ls -la build/ || (echo "ERROR: build directory not found" && exit 1)
+      - ls -la build/
       - echo "Build artifacts created successfully"
       - echo "Skipping S3 deployment for now - check artifacts in CodeBuild console"
 
@@ -36,12 +36,4 @@ cache:
     - '/root/.npm/**/*'
     - 'node_modules/**/*'
 
-reports:
-  test-report:
-    files:
-      - 'coverage/coverage-final.json'
-    file-format: 'JUNITXML'
-  coverage-report:
-    files:
-      - 'coverage/coverage-final.json'
-    file-format: 'COBERTURAXML'
+
