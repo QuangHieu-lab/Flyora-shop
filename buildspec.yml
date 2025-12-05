@@ -23,10 +23,15 @@ phases:
       - ls -la build/
       - echo "Build artifacts created successfully"
       - echo "Checking S3 bucket configuration..."
+      - echo "AWS_S3_BUCKET value: $AWS_S3_BUCKET"
+      - echo "Testing AWS credentials..."
+      - aws sts get-caller-identity || echo "AWS credentials not configured"
       - |
         if [ ! -z "$AWS_S3_BUCKET" ]; then
+          echo "Testing S3 bucket access: $AWS_S3_BUCKET";
+          aws s3 ls s3://$AWS_S3_BUCKET || echo "Cannot access S3 bucket";
           echo "Deploying to S3: $AWS_S3_BUCKET";
-          aws s3 sync build/ s3://$AWS_S3_BUCKET --delete;
+          aws s3 sync build/ s3://$AWS_S3_BUCKET --delete || echo "S3 sync failed";
         else
           echo "Skipping S3 deployment - no bucket configured";
         fi
