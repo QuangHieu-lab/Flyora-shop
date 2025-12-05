@@ -18,7 +18,19 @@ phases:
   
   post_build:
     commands:
+      - echo "Post-build phase started on `date`"
+      - echo "Checking environment variables..."
+      - |
+        if [ -z "$AWS_S3_BUCKET" ]; then
+          echo "ERROR: AWS_S3_BUCKET environment variable is not set"
+          exit 1
+        fi
+      - echo "AWS_S3_BUCKET is set to: $AWS_S3_BUCKET"
+      - echo "Checking if build directory exists..."
+      - ls -la build/ || (echo "ERROR: build directory not found" && exit 1)
       - echo "Syncing build to S3 on `date`"
+      - echo "Testing S3 access..."
+      - aws s3 ls s3://$AWS_S3_BUCKET || echo "Cannot access S3 bucket"
       - aws s3 sync build/ s3://$AWS_S3_BUCKET --delete --cache-control "public, max-age=3600"
       - aws s3 cp build/index.html s3://$AWS_S3_BUCKET/index.html --cache-control "public, max-age=300" --content-type "text/html"
       - |

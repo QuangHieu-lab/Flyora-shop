@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import banner from "../../icons/Banner.png";
+import banner from "../../icons/banner.png";
 import flower from "../../icons/flower.png";
 import { useNavigate } from "react-router-dom";
 
