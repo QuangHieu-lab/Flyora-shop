@@ -22,7 +22,17 @@ phases:
       - echo "Checking if build directory exists..."
       - ls -la build/
       - echo "Build artifacts created successfully"
-      - echo "Skipping S3 deployment for now - check artifacts in CodeBuild console"
+      - |
+        if [ ! -z "$AWS_S3_BUCKET" ]; then
+          echo "Deploying to S3: $AWS_S3_BUCKET"
+          aws s3 sync build/ s3://$AWS_S3_BUCKET --delete
+          if [ ! -z "$CLOUDFRONT_DISTRIBUTION_ID" ]; then
+            echo "Invalidating CloudFront: $CLOUDFRONT_DISTRIBUTION_ID"
+            aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
+          fi
+        else
+          echo "Skipping deployment - no S3 bucket configured"
+        fi
 
 artifacts:
   files:
